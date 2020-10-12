@@ -1,50 +1,16 @@
 <template>
 <div>
-  <mt-tabbar
-    v-model="curTab"
-    :fixed="true"
-  >
-    <mt-tab-item id="tab1" @click="setTab('tab1')">
-      <img
-        v-if="curTab=='tab1'"
-        slot="icon"
-        src="../assets/images/index2.png"
-      >
-      <img
-        v-else
-        slot="icon"
-        src="../assets/images/index.png"
-      >
-      首页
-    </mt-tab-item>
-    <mt-tab-item id="tab2" @click="setTab('tab2')">
-     <img
-        v-if="curTab=='tab2'"
-        slot="icon"
-        src="../assets/images/touzi2.png"
-      >
-      <img
-        v-else
-        slot="icon"
-        src="../assets/images/touzi.png"
-      >
-      投资
-    </mt-tab-item>
-    <mt-tab-item id="tab3" @click="setTab('tab3')">
-      <img
-        v-if="curTab=='tab3'"
-        slot="icon"
-        src="../assets/images/my2.png"
-      >
-      <img
-       @click="setTab('tab3')"
-        v-else
-        slot="icon"
-        src="../assets/images/my.png"
-      >
-      我的
-    </mt-tab-item>
-  </mt-tabbar>
+  <van-tabbar route active-color="#d81e06" inactive-color="#000">
+  <van-tabbar-item replace to="/home" icon="home-o">
+    首页
+  </van-tabbar-item>
+  <van-tabbar-item replace to="/invest" icon="chart-trending-o">
+    投资
+  </van-tabbar-item>
+  <van-tabbar-item replace to="/me" icon="user-o">
+    我的
+  </van-tabbar-item>
+</van-tabbar>
 </div>
 </template>
 
@@ -53,7 +19,6 @@ export default {
   name: '',
   data () {
     return {
-      curTab:'tab1'
     }
   },
   created () {
@@ -63,27 +28,7 @@ export default {
 
   },
   methods: {
-    setTab(tab){
-      this.curTab = tab
-    }
-  },
-  watch:{
-    curTab:function(val,oldVal){
-      console.log(val)
-       switch(val){
-        case 'tab1':
-          this.$router.push('/');
-          break;
-           case 'tab2':
-        this.$router.push('/invest');
-          break;
-        case 'tab3':
-          this.$router.push('/me');
-          break;
-      }
-    }
   }
-
 }
 </script>
 <style>

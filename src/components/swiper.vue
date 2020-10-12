@@ -1,16 +1,16 @@
 <template>
   <div class=''>
-    <mt-swipe :auto="4000" style="height:160px">
-      <mt-swipe-item>
-        <img src="../assets/images/s1.jpg" alt="" />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="../assets/images/s2.jpg" alt="" />
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img src="../assets/images/s3.jpg" alt="" />
-      </mt-swipe-item>
-    </mt-swipe>
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="height:160px">
+    <van-swipe-item>
+      <img src="../assets/images/s1.jpg" alt="" />
+    </van-swipe-item>
+     <van-swipe-item>
+      <img src="../assets/images/s2.jpg" alt="" />
+    </van-swipe-item>
+     <van-swipe-item>
+      <img src="../assets/images/s3.jpg" alt="" />
+    </van-swipe-item>
+  </van-swipe>
   </div>
 </template>
 
@@ -36,9 +36,13 @@ export default {
 </script>
 
 <style scoped>
-.mint-swipe img {
+.van-swipe {
+  border: none;
+}
+.van-swipe img {
   width: 100%;
   height: 100%;
   border-radius: 8px;
+
 }
 </style>

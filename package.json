@@ -10,9 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.20.0",
     "less": "^3.9",
     "less-loader": "^5.0.0",
     "mint-ui": "^2.2.13",
+    "vant": "^2.10.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

@@ -30,16 +30,16 @@
     </ul>
 
     <div>
-      <mt-cell title="提现" to="#" is-link> </mt-cell>
-      <mt-cell title="银行卡" to="#" is-link> </mt-cell>
-      <mt-cell title="投资记录" to="#" is-link> </mt-cell>
-      <mt-cell title="账户明细" to="#" is-link> </mt-cell>
-      <mt-cell title="账户安全" to="#" is-link> </mt-cell>
-      <mt-cell title="完善信息" to="#" is-link> </mt-cell>
+      <van-cell title="提现" to="#" is-link />
+      <van-cell title="银行卡" to="#" is-link />
+      <van-cell title="投资记录" to="#" is-link />
+      <van-cell title="账户明细" to="#" is-link />
+      <van-cell title="账户安全" to="#" is-link />
+      <van-cell title="完善信息" to="#" is-link />
     </div>
 
     <div class="exit-box">
-      <button class="exit-btn">退出</button>
+      <button class="exit-btn" @click="exit">退出</button>
     </div>
   </div>
 </template>
@@ -52,7 +52,12 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    // 退出登录
+    exit(){
+      localStorage.clear();
+      this.$router.push('/login')
+    }}
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Swiper />
-    <div class="card_box">
+    <!-- <div class="card_box">
       <div>
         <img src="../assets/images/礼物.png" alt="" />
         <p>我的团队</p>
@@ -14,44 +14,29 @@
         <img src="../assets/images/推荐.png" alt="" />
         <p>我的推荐</p>
       </div>
-    </div>
+    </div> -->
     <div>
-      <mt-cell title="热门项目" to="#" is-link value="更多"> </mt-cell>
-      <mt-swipe :show-indicators="false"  style="height:160px">
-        <mt-swipe-item>
-          <div class="p_item shadow">
+      <!-- <mt-cell title="热门项目" to="#" is-link value="更多"> </mt-cell> -->
+      <div class="pro-tip">
+        热门项目
+      </div>
+      <van-swipe class="my-swipe" :loop="false"  indicator-color="white" style="height:160px">
+      <van-swipe-item>
+        <div class="p_item shadow">
             <h3>投资金额</h3>
             <p>利润高 方便快捷</p>
             <div class="money">￥3000</div>
             <button class="detail">查看详情</button>
-          </div>
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <div class="p_item shadow">
-            <h3>投资金额</h3>
-            <p>利润高 方便快捷</p>
-            <div class="money">￥2000</div>
-            <button class="detail">查看详情</button>
-          </div>
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <div class="p_item shadow">
-            <h3>投资金额</h3>
-            <p>利润高 方便快捷</p>
-            <div class="money">￥1000</div>
-            <button class="detail">查看详情</button>
-          </div>
-        </mt-swipe-item>
-      </mt-swipe>
+        </div>
+      </van-swipe-item>
+    </van-swipe>
     </div>
     <div>
-      <mt-cell title="优选项目" to="#" is-link value="更多"> </mt-cell>
+      <!-- <mt-cell title="优选项目" to="#" is-link value="更多"> </mt-cell> -->
+      <div class="pro-tip">
+        优选项目
+      </div>
       <ul class="good_pro">
-        <li class="">
-          <div class="money">30</div>
-          <div class="desc">奖励转不停</div>
-          <div class="tip">团队人数</div>
-        </li>
         <li class="">
           <div class="money">30</div>
           <div class="desc">奖励转不停</div>
@@ -97,6 +82,12 @@ export default {
   border-radius: 5px;
   border: 1px solid #ebeef5;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.pro-tip{
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
 }
 .card_box {
   display: flex;
@@ -149,13 +140,13 @@ export default {
 .good_pro {
   width: 100%;
   display: flex;
-  overflow-x: auto;
+  justify-content: space-between;
 
   li{
-    min-width: 100px;
+    width: 30%;
+    box-sizing: border-box;
     padding: 10px;
-    margin-right: 10px;
-    flex-shrink: 0;
+    // flex-shrink: 0;
     border-radius: 5px;
   border: 1px solid #ebeef5;
     .money{

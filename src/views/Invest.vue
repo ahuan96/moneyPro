@@ -1,6 +1,6 @@
 <template>
   <div class=''>
-    投资
+    <van-empty description="暂时空白" />
   </div>
 </template>
 

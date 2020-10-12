@@ -2,7 +2,7 @@
   <div id="app">
 
     <router-view/>
-    <Tabbar/>
+    <Tabbar v-if="$route.meta.showTab" />
   </div>
 </template>
 
