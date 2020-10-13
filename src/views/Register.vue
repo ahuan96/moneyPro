@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1 class="tip">登录</h1>
+    <h1 class="tip">注册</h1>
     <van-form @submit="onSubmit" class="form">
       <van-field
         v-model="username"
@@ -18,7 +18,16 @@
         placeholder="密码"
         :rules="[{ required: true, message: '请填写密码' }]"
       />
-      <div class="to-register"><router-link to="/register" tag="span">我要注册</router-link></div>
+      <van-field
+        class="pass-box"
+        v-model="icode"
+        type="text"
+        name="邀请码"
+        label="邀请码"
+        placeholder="邀请码"
+        :rules="[{ required: true, message: '请填写邀请码' }]"
+      />
+      <div class="to-register"><router-link to="login" tag="span">我要登录</router-link></div>
       <div style="margin: 16px;">
         <van-button
           style="color: #74C3CA;"
@@ -41,7 +50,8 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      icode:""
     };
   },
   created() {},

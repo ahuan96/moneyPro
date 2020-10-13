@@ -31,10 +31,10 @@
 
     <div>
       <van-cell title="提现" to="#" is-link />
-      <van-cell title="银行卡" to="#" is-link />
+      <van-cell title="银行卡" to="bank" is-link />
       <van-cell title="投资记录" to="#" is-link />
       <van-cell title="账户明细" to="#" is-link />
-      <van-cell title="账户安全" to="#" is-link />
+      <van-cell title="账户安全" to="account" is-link />
       <van-cell title="完善信息" to="#" is-link />
     </div>
 

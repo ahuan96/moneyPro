@@ -5,6 +5,9 @@ import Home from '@/views/Home'
 import Me from '@/views/Me'
 import Invest from '@/views/Invest'
 import Login from '@/views/Login'
+import Register from '@/views/Register'
+import Bank from '@/views/Bank'
+import Account from '@/views/Account'
 
 Vue.use(Router)
 
@@ -49,6 +52,28 @@ const router = new Router({
       meta:{
         showTab:false
       }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/bank',
+      name: 'Bank',
+      component: Bank,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/account',
+      name: 'Account',
+      component: Account,
+      meta:{
+        showTab:false
+      }
     }
   ]
 })
@@ -57,8 +82,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(1321)
   console.log(to, from)
-  if (to.path == '/login') {
+  if (to.path == '/login' || to.path == '/register') {
     next()
+    return
   }
   if (!localStorage.getItem('user')) {
     next({path: '/login'})
