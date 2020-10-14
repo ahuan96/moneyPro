@@ -1,6 +1,6 @@
 <template>
 <div>
-  <van-tabbar route active-color="#d81e06" inactive-color="#000" style="height:60px;">
+  <van-tabbar route active-color="#d81e06" inactive-color="#000" style="height:3rem;">
   <van-tabbar-item replace to="/home" icon="home-o">
     首页
   </van-tabbar-item>

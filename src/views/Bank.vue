@@ -9,7 +9,7 @@
       style="border-bottom: 1px solid #eee"
     />
 
-    <ul class="card-list">
+    <ul class="card-list" v-if="cardList&&cardList.length>0">
       <li v-for="item in cardList" :key="item.id">
         <div>
           <i>姓名</i>
@@ -19,12 +19,12 @@
           <i>卡号</i>
           <span>{{item.cardNum}}</span>
         </div>
+        <van-icon class="del-btn" name="delete" @click="delCard" />
       </li>
-      
     </ul>
 
-    <div class="btn-box">
-      <van-button style="width: 90%" plain type="info" @click="showAdd = true"
+    <div class="btn-box" v-else>
+      <van-button style="width: 90%;margin-top:0.5rem;" plain type="info" @click="showAdd = true"
         >点击添加</van-button
       >
     </div>
@@ -68,13 +68,13 @@
 </template>
 
 <script>
-import { Notify } from 'vant';
+import { Notify,Dialog,Toast } from 'vant';
 export default {
   name: "",
   data() {
     return {
       showAdd: false,
-      cardList:[{id:'1',userName:'马化腾',cardNum:'3989 9808 1231 3243'},{id:'2',userName:'王健林',cardNum:'3239 92308 14331 32123'}],
+      cardList:[{id:'1',userName:'王健林',cardNum:'3239 92308 14331 32123'}],
       cardName: '', // 银行卡用户名
       cardNum: '' // 银行卡号
     };
@@ -84,7 +84,7 @@ export default {
   methods: {
       // 添加银行卡
       addCard(){
-          Notify({ type: 'success', message: '添加成功', duration: 1000, });
+          Toast.success('添加成功');
           let item = {
               userName:this.cardName,
               cardNum:this.cardNum
@@ -95,6 +95,22 @@ export default {
           this.cardNum = ''
           // 回到列表
           this.showAdd = false
+      },
+      // 删除银行卡
+      delCard(){
+        Dialog.confirm({
+        title: '提示',
+        message: '确定删除吗？',
+      })
+        .then(() => {
+          this.cardList = []
+          Toast.success('删除成功');
+          // on confirm
+        })
+        .catch(() => {
+          // on cancel
+
+        });
       }
   },
 };
@@ -107,24 +123,33 @@ export default {
     flex-direction: column;
     align-items: center;
     li {
+      position: relative;
       background: linear-gradient(to top, #17ead8 0%, #6078ea 100%);
       // background: #4e71f2;
       color: #fff;
       width: 90%;
-      padding: 20px;
+      padding: 1rem;
       box-sizing: border-box;
-      border-radius: 10px;
-      font-size: 16px;
-      line-height: 30px;
-      margin: 10px 0;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+      margin: 0.5rem 0;
       i {
-        font-size: 18px;
+        font-size: 0.9rem;
         font-weight: bold;
+      }
+      .del-btn{
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem;
+        cursor: pointer;
       }
     }
   }
   .btn-box {
     text-align: center;
   }
+
 }
 </style>

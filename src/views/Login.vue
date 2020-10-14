@@ -27,7 +27,7 @@
           type="default"
           native-type="submit"
         >
-          提交
+          登录
         </van-button>
       </div>
     </van-form>
@@ -72,7 +72,7 @@ export default {
   background: url("../assets/images/bg.jpg") no-repeat;
   background-size: 100% 100%;
   height: 100%;
-  padding: 20px;
+  padding: 1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -80,26 +80,26 @@ export default {
   align-items: center;
 
   .tip {
-    margin-top: 50px;
+    margin-top: 2.5rem;
     font-weight: bold;
     color: #fff;
     font-size: 1.8rem;
-    padding-left: 20px;
+    padding-left: 1rem;
     padding-bottom: 1rem;
   }
   .form {
-    margin-top: 80px;
+    margin-top: 4rem;
     input {
     }
   }
   button {
-    margin-top: 100px;
+    margin-top: 5rem;
   }
   .to-register{
     text-align: right;
     color: #fff;
-    height: 30px;
-    line-height: 30px;
+    height: 1.5rem;
+    line-height: 1.5rem;
     font-size: 16px;
     cursor: pointer;
   }

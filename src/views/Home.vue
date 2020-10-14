@@ -20,16 +20,21 @@
       <div class="pro-tip">
         热门项目
       </div>
-      <van-swipe class="my-swipe" :loop="false"  indicator-color="white" style="height:160px">
-      <van-swipe-item>
-        <div class="p_item shadow">
+      <van-swipe
+        class="my-swipe"
+        :loop="false"
+        indicator-color="white"
+        style="height:8rem"
+      >
+        <van-swipe-item>
+          <div class="p_item shadow">
             <h3>投资金额</h3>
             <p>利润高 方便快捷</p>
             <div class="money">￥3000</div>
             <button class="detail">查看详情</button>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
+          </div>
+        </van-swipe-item>
+      </van-swipe>
     </div>
     <div>
       <!-- <mt-cell title="优选项目" to="#" is-link value="更多"> </mt-cell> -->
@@ -75,65 +80,65 @@ export default {
 
 <style scoped lang="less">
 .home {
-  padding: 10px;
-  padding-bottom: 70px;
+  padding: 0.5rem;
+  padding-bottom: 3.5rem;
 }
 .shadow {
-  border-radius: 5px;
-  border: 1px solid #ebeef5;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  border: 0.05rem solid #ebeef5;
+  box-shadow: 0 0.1rem 0.6rem 0 rgba(0, 0, 0, 0.1);
 }
-.pro-tip{
-  font-size: 14px;
+.pro-tip {
+  font-size: 0.8rem;
   font-weight: bold;
-  height: 40px;
-  line-height: 40px;
+  height: 2rem;
+  line-height: 2rem;
 }
 .card_box {
   display: flex;
   div {
-    padding-top: 10px;
-    margin: 0 10px;
-    width: 60px;
+    padding-top: 0.5rem;
+    margin: 0 0.5rem;
+    width: 3rem;
     text-align: center;
   }
   img {
-    width: 32px;
+    width: 1.6rem;
   }
   p {
-    font-size: 12px;
-    line-height: 24px;
+    font-size: 0.6rem;
+    line-height: 1.2rem;
   }
 }
 .p_item {
   justify-content: space-around;
-  padding: 10px;
+  padding: 0.5rem;
   height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   h3 {
-    font-size: 16px;
+    font-size: 0.8rem;
     font-weight: bold;
   }
   p {
     color: #aaa;
-    margin-top: 10px;
+    margin-top: 0.5rem;
   }
   .money {
-    font-size: 24px;
+    font-size: 1.2rem;
     font-weight: bold;
-    color:#DD5044;
-    margin: 10px;
+    color: #dd5044;
+    margin: 0.5rem;
   }
   button {
-    background:#DD5044;
+    background: #dd5044;
     color: #fff;
-    border-radius: 30px;
-    width: 200px;
-    height: 30px;
-    line-height: 30px;
+    border-radius: 1.5rem;
+    width: 10rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
     border: none;
   }
 }
@@ -141,29 +146,29 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  li{
+  li {
     width: 30%;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 0.5rem;
     // flex-shrink: 0;
-    border-radius: 5px;
-  border: 1px solid #ebeef5;
-    .money{
-    font-size: 20px;
-    font-weight: bold;
-    color:#DD5044;
-    // color:#DD5044;
-  }
-  .desc{
-    color: #aaa;
-    margin: 10px 0;
-  }
-  .tip{
-    font-size: 14px;
-    color: #000;
-    font-weight: bold;
-  }
+    border-radius: 0.25rem;
+    border: 0.05rem solid #ebeef5;
+    .money {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #dd5044;
+      // color:#DD5044;
+    }
+    .desc {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin: 0.5rem 0;
+    }
+    .tip {
+      font-size: 0.7rem;
+      color: #000;
+      font-weight: bold;
+    }
   }
 }
 </style>
@@ -172,15 +177,15 @@ export default {
   padding: 0;
 }
 .home .mint-cell-title {
-  font-size: 14px;
+  font-size: 0.7rem;
   font-weight: bold;
 }
 .home .mint-cell-value.is-link {
-  font-size: 12px;
-  margin-right: 20px;
+  font-size: 0.6rem;
+  margin-right: 1rem;
 }
 .home .mint-cell-allow-right::after {
   position: absolute;
-  right: 10px;
+  right: 0.5rem;
 }
 </style>

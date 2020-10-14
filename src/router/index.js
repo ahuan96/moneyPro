@@ -9,6 +9,8 @@ import Register from '@/views/Register'
 import Bank from '@/views/Bank'
 import Account from '@/views/Account'
 import UserInfo from '@/views/UserInfo'
+import InvestHistory from '@/views/InvestHistory'
+import AccountHistory from '@/views/AccountHistory'
 
 Vue.use(Router)
 
@@ -79,6 +81,20 @@ const router = new Router({
       path: '/userinfo',
       name: 'UserInfo',
       component: UserInfo,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/investHistory',
+      name: 'InvestHistory',
+      component: InvestHistory,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/accountHistory',
+      name: 'AccountHistory',
+      component: AccountHistory,
       meta:{
         showTab:false
       }

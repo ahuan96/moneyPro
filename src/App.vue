@@ -27,7 +27,9 @@ export default {
 <style>
 html,body{
   height: 100%;
-  font-size: 12px;
+}
+body{
+  font-size: 0.8rem;
 }
 #app {
   height: 100%;

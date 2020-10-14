@@ -1,12 +1,11 @@
 <template>
   <div class="Me">
     <div class="head_box">
-      <div>
+      <div class="h_bg1"></div>
+      <div></div>
+      <div class="user">
         <img src="../assets/images/head.png" alt="" />
-      </div>
-      <div>
-        <div class="name">admin666</div>
-        <div class="desc">admin</div>
+        <h3>王健林</h3>
       </div>
     </div>
 
@@ -32,10 +31,10 @@
     <div>
       <van-cell title="提现" to="#" is-link />
       <van-cell title="银行卡" to="bank" is-link />
-      <van-cell title="投资记录" to="#" is-link />
-      <van-cell title="账户明细" to="#" is-link />
+      <van-cell title="投资记录" to="investHistory" is-link />
+      <van-cell title="账户明细" to="accountHistory" is-link />
       <van-cell title="账户安全" to="account" is-link />
-      <van-cell title="完善信息" to="userinfo" is-link />
+      <!-- <van-cell title="完善信息" to="userinfo" is-link /> -->
     </div>
 
     <div class="exit-box">
@@ -63,44 +62,55 @@ export default {
 
 <style lang="less" scoped>
 .Me {
-  padding: 10px 0;
+  padding: 0.5rem 0;
   background: #fafafa;
-  height: 100%;
+  min-height: 100%;
   box-sizing: border-box;
 }
 .head_box {
-  background: #dd5044;
-  padding: 20px 20px;
-  margin: 0 10px;
-  display: flex;
-  align-items: center;
-  border-radius: 50px;
-  color: #fff;
-  img {
-    border: 4px solid #fff;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
+  position: relative;
+  >div{
+    height: 4.5rem;
   }
-  .name {
-    font-size: 16px;
-    margin-bottom: 5px;
+  .h_bg1{
+    background: #d0b0b8;
+  }
+  .user{
+     width: 4.5rem;
+    height: 4.5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -2.25rem;
+    margin-top:  -2.25rem;
+  }
+  img{
+    width: 4.5rem;
+    display: block;
+    border: 0.25rem solid #ffff;
+    border-radius: 100%;
+  }
+  h3{
+    margin: 0.5rem 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
   }
 }
 .count_box {
-  margin: 15px 0;
+  margin: 0.75rem 0;
   display: flex;
   background: #fff;
-  padding: 15px;
+  padding: 0.75rem;
 
   li {
     width: 25%;
-    border-right: 1px solid #ccc;
+    border-right: 0.05rem solid #ccc;
     text-align: center;
     p {
       color: #dd5044;
-      font-size: 16px;
-      margin: 5px 0;
+      font-size: 0.8rem;
+      margin: 0.25rem 0;
     }
   }
   li:last-child {
@@ -110,14 +120,14 @@ export default {
 .exit-box {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 1.5rem;
   .exit-btn {
     text-align: center;
-    padding:10px;
+    padding:0.5rem;
     border: 1px solid #dd5044;
     color: #dd5044;
     width: 50%;
-    border-radius: 5px;
+    border-radius: 0.25rem;
     background: #fff;
   }
 }
@@ -128,6 +138,6 @@ export default {
   border-bottom: 1px solid #eee;
 }
 .Me .mint-cell-text {
-  font-size: 14px;
+  font-size: 0.7rem;
 }
 </style>

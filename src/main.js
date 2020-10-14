@@ -16,7 +16,8 @@ import '../src/assets/style/reset.css'
 
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
+// 配置rem根元素大小
+import rem from './utils/rem'
 Vue.use(Vant);
 
 /* eslint-disable no-new */

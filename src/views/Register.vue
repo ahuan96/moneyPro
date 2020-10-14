@@ -20,6 +20,15 @@
       />
       <van-field
         class="pass-box"
+        v-model="repassword"
+        type="password"
+        name="确认密码"
+        label="确认密码"
+        placeholder="确认密码"
+        :rules="[{ required: true, message: '请填写确认密码' },{validator:validatorPass,message: '与密码填写不一致'}]"
+      />
+      <van-field
+        class="pass-box"
         v-model="icode"
         type="text"
         name="邀请码"
@@ -36,7 +45,7 @@
           type="default"
           native-type="submit"
         >
-          提交
+          注册
         </van-button>
       </div>
     </van-form>
@@ -51,6 +60,7 @@ export default {
     return {
       username: "",
       password: "",
+      repassword: "",
       icode:""
     };
   },
@@ -70,8 +80,14 @@ export default {
       // 进行登录请求
       //
       localStorage.setItem("user", this.username);
-      Notify({ type: "success", message: "登录成功", duration: 1000 });
+      Notify({ type: "success", message: "注册成功", duration: 1000 });
       this.$router.push("/home");
+    },
+    validatorPass(){
+      if(this.password == this.repassword){
+        return true
+      }
+      return false
     }
   }
 };
@@ -82,7 +98,7 @@ export default {
   background: url("../assets/images/bg.jpg") no-repeat;
   background-size: 100% 100%;
   height: 100%;
-  padding: 20px;
+  padding: 1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -90,27 +106,27 @@ export default {
   align-items: center;
 
   .tip {
-    margin-top: 50px;
+    margin-top: 2.5rem;
     font-weight: bold;
     color: #fff;
     font-size: 1.8rem;
-    padding-left: 20px;
+    padding-left: 1rem;
     padding-bottom: 1rem;
   }
   .form {
-    margin-top: 80px;
+    margin-top: 4rem;
     input {
     }
   }
   button {
-    margin-top: 100px;
+    margin-top: 5rem;
   }
   .to-register{
     text-align: right;
     color: #fff;
-    height: 30px;
-    line-height: 30px;
-    font-size: 16px;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.8rem;
     cursor: pointer;
   }
 }

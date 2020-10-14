@@ -1,5 +1,13 @@
 <template>
   <div class=''>
+    <van-nav-bar
+        title="投资记录"
+        left-text="返回"
+        left-arrow
+        border
+        @click-left="$router.go(-1)"
+        style="border-bottom: 1px solid #eee"
+        />
     <InvestList ref="InvestList" :list="list" :onRefresh="onRefresh"/>
   </div>
 </template>
