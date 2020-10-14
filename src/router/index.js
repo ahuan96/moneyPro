@@ -8,6 +8,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Bank from '@/views/Bank'
 import Account from '@/views/Account'
+import UserInfo from '@/views/UserInfo'
 
 Vue.use(Router)
 
@@ -71,6 +72,13 @@ const router = new Router({
       path: '/account',
       name: 'Account',
       component: Account,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/userinfo',
+      name: 'UserInfo',
+      component: UserInfo,
       meta:{
         showTab:false
       }

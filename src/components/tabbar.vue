@@ -1,6 +1,6 @@
 <template>
 <div>
-  <van-tabbar route active-color="#d81e06" inactive-color="#000">
+  <van-tabbar route active-color="#d81e06" inactive-color="#000" style="height:60px;">
   <van-tabbar-item replace to="/home" icon="home-o">
     首页
   </van-tabbar-item>
@@ -31,11 +31,3 @@ export default {
   }
 }
 </script>
-<style>
-.mint-tabbar > .mint-tab-item.is-selected {
-  color: #d81e06;
-}
-.mint-tabbar.is-fixed{
-  border-top: 1px solid #eee;
-}
-</style>

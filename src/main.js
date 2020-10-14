@@ -14,10 +14,6 @@ Vue.prototype.$get = fetch
 // reset.css 全局重置样式
 import '../src/assets/style/reset.css'
 
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css'
-Vue.use(Mint);
-
 import Vant from 'vant';
 import 'vant/lib/index.css';
 

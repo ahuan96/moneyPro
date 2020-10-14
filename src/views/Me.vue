@@ -2,7 +2,7 @@
   <div class="Me">
     <div class="head_box">
       <div>
-        <img src="../assets/images/head.jpg" alt="" />
+        <img src="../assets/images/head.png" alt="" />
       </div>
       <div>
         <div class="name">admin666</div>
@@ -35,7 +35,7 @@
       <van-cell title="投资记录" to="#" is-link />
       <van-cell title="账户明细" to="#" is-link />
       <van-cell title="账户安全" to="account" is-link />
-      <van-cell title="完善信息" to="#" is-link />
+      <van-cell title="完善信息" to="userinfo" is-link />
     </div>
 
     <div class="exit-box">
