@@ -1,74 +1,54 @@
 <template>
-  <div class=''>
-    <InvestList ref="InvestList" :list="list" :onRefresh="onRefresh"/>
+  <div class="Invest">
+    <InvestList ref="InvestList" :list="list" :onRefresh="onRefresh" />
   </div>
 </template>
 
 <script>
-import InvestList from '../components/investList'
-import { Toast } from 'vant';
+import InvestList from "../components/investList";
+import { Toast } from "vant";
 
 export default {
-  name: '',
-  components:{
+  name: "",
+  components: {
     InvestList
   },
-  data(){
+  data() {
     return {
-      list:[{
-          id:'1',
-          type:'佣金',
-          desc:'马化腾支付佣金100块钱',
-          time:'2020-12-2 18:23:00'
-        },{
-          id:'2',
-          type:'投资',
-          desc:'投资了阿里巴巴50块钱，并且跟马云商讨下一步合作计划',
-          time:'2020-12-2 18:23:00'
-        },{
-          id:'3',
-          type:'奖金',
-          desc:'王健林发放给我1000w奖金',
-          time:'2020-12-2 18:23:00'
-        },{
-          id:'4',
-          type:'佣金',
-          desc:'马化腾支付佣金100块钱',
-          time:'2020-12-2 18:23:00'
-        },{
-          id:'5',
-          type:'投资',
-          desc:'投资了阿里巴巴50块钱，并且跟马云商讨下一步合作计划',
-          time:'2020-12-2 18:23:00'
-        },{
-          id:'6',
-          type:'奖金',
-          desc:'王健林发放给我1000w奖金',
-          time:'2020-12-2 18:23:00'
-        }],
-      count: 0,
-    }
+      list: []
+    };
   },
-  created() {
-
-  },
+  created() {},
   mounted() {
-
+    this.getList();
   },
-  methods:{
-  onRefresh() {
-      setTimeout(() => {
+  methods: {
+    // 下拉刷新
+    onRefresh() {
+      let _this = this;
+      this.getList(() => {
         Toast("刷新成功");
-        this.isLoading = false;
-        this.$refs.InvestList.setLoad(false)
-        this.count++;
-      }, 1000);
+        _this.isLoading = false;
+        _this.$refs.InvestList.setLoad(false);
+      });
+    },
+    // 获取列表数据
+    getList(cb) {
+      this.$GET("/record/getAllRecord", {}).then(res => {
+        console.log(res);
+        this.list = res.data;
+        if (cb) {
+          cb();
+        }
+      });
     }
   }
-
-}
+};
 </script>
 
-<style lang='less' scoped>
-
+<style lang="less" scoped>
+.Invest {
+  height: 100%;
+  // padding-bottom: 3rem;
+}
 </style>

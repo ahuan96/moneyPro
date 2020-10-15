@@ -11,6 +11,7 @@ import Account from '@/views/Account'
 import UserInfo from '@/views/UserInfo'
 import InvestHistory from '@/views/InvestHistory'
 import AccountHistory from '@/views/AccountHistory'
+import Withdraw from '@/views/Withdraw'
 
 Vue.use(Router)
 
@@ -95,6 +96,13 @@ const router = new Router({
       path: '/accountHistory',
       name: 'AccountHistory',
       component: AccountHistory,
+      meta:{
+        showTab:false
+      }
+    },{
+      path: '/withdraw',
+      name: 'Withdraw',
+      component: Withdraw,
       meta:{
         showTab:false
       }

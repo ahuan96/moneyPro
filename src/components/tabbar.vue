@@ -1,6 +1,5 @@
 <template>
-<div>
-  <van-tabbar route active-color="#d81e06" inactive-color="#000" style="height:3rem;">
+  <van-tabbar route fixed placeholder  active-color="#d81e06" inactive-color="#000">
   <van-tabbar-item replace to="/home" icon="home-o">
     首页
   </van-tabbar-item>
@@ -11,7 +10,6 @@
     我的
   </van-tabbar-item>
 </van-tabbar>
-</div>
 </template>
 
 <script>

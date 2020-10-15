@@ -13,11 +13,11 @@
       <li v-for="item in cardList" :key="item.id">
         <div>
           <i>姓名</i>
-          <span>{{item.userName}}</span>
+          <span>{{item.cardname}}</span>
         </div>
         <div>
           <i>卡号</i>
-          <span>{{item.cardNum}}</span>
+          <span>{{item.cardid}}</span>
         </div>
         <van-icon class="del-btn" name="delete" @click="delCard" />
       </li>
@@ -39,6 +39,8 @@
       left-text="关闭"
       left-arrow
       border
+      fixed
+      placeholder
       @click-left="showAdd=false"
       style="border-bottom: 1px solid #eee"
     />
@@ -74,27 +76,34 @@ export default {
   data() {
     return {
       showAdd: false,
-      cardList:[{id:'1',userName:'王健林',cardNum:'3239 92308 14331 32123'}],
+      cardList:[{id:'1',userName:'cardname',cardid:'3239 92308 14331 32123'}],
       cardName: '', // 银行卡用户名
       cardNum: '' // 银行卡号
     };
   },
   created() {},
-  mounted() {},
+  mounted() {
+    this.getList()
+  },
   methods: {
       // 添加银行卡
       addCard(){
-          Toast.success('添加成功');
+          // Toast.success('添加成功');
           let item = {
-              userName:this.cardName,
-              cardNum:this.cardNum
+              cardname:this.cardName,
+              cardid:this.cardNum
           }
-          this.cardList.push(item)
-          // 置空
-          this.cardName = ''
-          this.cardNum = ''
-          // 回到列表
-          this.showAdd = false
+        this.$POST('/card/addBankCard',item)
+        .then(res=>{
+          console.log('res')
+        })
+
+          // this.cardList.push(item)
+          // // 置空
+          // this.cardName = ''
+          // this.cardNum = ''
+          // // 回到列表
+          // this.showAdd = false
       },
       // 删除银行卡
       delCard(){
@@ -111,7 +120,20 @@ export default {
           // on cancel
 
         });
-      }
+      },
+      // 获取列表数据
+        getList(cb) {
+          this.$GET("/card/getCardByUserId", {}).then(res => {
+            console.log(res);
+            res.data.forEach((item)=>{
+              item.cardid = item.cardid.replace(/\s/g, '').replace(/(\w{4})(?=\w)/g, '$1 ')
+            })
+            this.cardList = res.data;
+            if (cb) {
+              cb();
+            }
+          });
+        }
   },
 };
 </script>

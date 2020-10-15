@@ -32,6 +32,7 @@ body{
   font-size: 0.8rem;
 }
 #app {
-  height: 100%;
+  min-height: 100%;
+  position: relative;
 }
 </style>

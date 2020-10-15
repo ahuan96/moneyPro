@@ -28,9 +28,9 @@
       >
         <van-swipe-item>
           <div class="p_item shadow">
-            <h3>投资金额</h3>
-            <p>利润高 方便快捷</p>
-            <div class="money">￥3000</div>
+            <h3>{{proData.projectname}}</h3>
+            <p>{{proData.projectsampledec}}</p>
+            <div class="money">{{proData.projectmonenynum}}</div>
             <button class="detail">查看详情</button>
           </div>
         </van-swipe-item>
@@ -43,18 +43,18 @@
       </div>
       <ul class="good_pro">
         <li class="">
-          <div class="money">30</div>
-          <div class="desc">奖励转不停</div>
+          <div class="money">{{proData.projectteamnum}}</div>
+          <div class="desc">{{proData.projectteamnum}}</div>
           <div class="tip">团队人数</div>
         </li>
         <li class="">
-          <div class="money">30</div>
-          <div class="desc">奖励转不停</div>
+          <div class="money">{{proData.projectteamnum}}</div>
+          <div class="desc">{{proData.projectteamnumdec}}</div>
           <div class="tip">团队人数</div>
         </li>
         <li class="">
-          <div class="money">30</div>
-          <div class="desc">奖励转不停</div>
+          <div class="money">{{proData.projectperson}}</div>
+          <div class="desc">{{proData.projectpersondec}}</div>
           <div class="tip">团队人数</div>
         </li>
       </ul>
@@ -70,11 +70,30 @@ export default {
     Swiper
   },
   data() {
-    return {};
+    return {
+      proData:{}
+    };
   },
   created() {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.getData()
+  },
+  methods: {
+   // 获取项目数据
+    getData(cb) {
+      this.$GET("/index/getProject", {}).then(res => {
+        console.log(res);
+        if(res.data && res.data.length>0){
+           this.proData = res.data[0];
+        }else{
+          this.proData = {}
+        }
+        if (cb) {
+          cb();
+        }
+      });
+    }
+  }
 };
 </script>
 
@@ -133,6 +152,7 @@ export default {
     margin: 0.5rem;
   }
   button {
+    font-size: 0.7rem;
     background: #dd5044;
     color: #fff;
     border-radius: 1.5rem;
@@ -154,13 +174,13 @@ export default {
     border-radius: 0.25rem;
     border: 0.05rem solid #ebeef5;
     .money {
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: bold;
       color: #dd5044;
       // color:#DD5044;
     }
     .desc {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: #aaa;
       margin: 0.5rem 0;
     }

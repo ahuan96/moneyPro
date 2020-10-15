@@ -10,9 +10,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+   // 原本proxyTable属性中对象为空，在此进行proxy代理配置（可以跨域）
+    proxyTable: {
+      '/api': {
+        target: 'http://118.107.40.50:8080/',   // target表示代理的服务器url
+        pathRewrite: {     // pathRewrite表示路径重写，key表示一个正则，value表示别名
+          '^/api': ''   // 即用 '/api'表示'http://localhost:3000/api'
+        }
+      }
+    },
+    // ---------------------------------------------------------
 
     // Various Dev Server settings
+    // host: 'localhost', // can be overwritten by process.env.HOST
     host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,

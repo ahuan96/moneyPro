@@ -2,8 +2,9 @@ import axios from 'axios'
 // import { Message } from 'element-ui';
 
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'http://localhost:3000/'
-// axios.defaults.baseURL = 'http://47.95.207.130:3000/'
+// axios.defaults.baseURL = 'http://localhost:3000/'
+// axios.defaults.baseURL = 'http://118.107.40.50:8080/'
+axios.defaults.baseURL = '/api'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -46,6 +47,11 @@ axios.interceptors.response.use(
  */
 
 export function fetch(url, params = {}) {
+  let user = localStorage.getItem('user')
+  if(user){
+    user = JSON.parse(user)
+    params.userid = user.userid
+  }
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
@@ -69,6 +75,11 @@ export function fetch(url, params = {}) {
 
 export function post(url, data = {}) {
   console.log(data)
+  let user = localStorage.getItem('user')
+  if(user){
+    user = JSON.parse(user)
+    data.userid = user.userid
+  }
   return new Promise((resolve, reject) => {
     let param = new URLSearchParams()
     for(let item in data){

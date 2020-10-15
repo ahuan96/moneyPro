@@ -8,8 +8,8 @@ Vue.config.productionTip = false
 
 
 // 方法库设置
-Vue.prototype.$post = post
-Vue.prototype.$get = fetch
+Vue.prototype.$POST = post
+Vue.prototype.$GET = fetch
 
 // reset.css 全局重置样式
 import '../src/assets/style/reset.css'

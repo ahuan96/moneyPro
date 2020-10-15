@@ -1,14 +1,14 @@
 <template>
-  <div class="">
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+  <div class="investList">
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh" style="min-height: 100vh;">
       <ul v-if="list && list.length > 0">
         <li v-for="item in list" :key="item.id">
           <div class="left">
-            <p class="type">{{ item.type }}</p>
+            <p class="type">{{ item.recordtype }}</p>
           </div>
           <div>
-            <h3 class="desc">{{ item.desc }}</h3>
-            <p class="time">{{ item.time }}</p>
+            <h3 class="desc">{{ item.recorddec }}</h3>
+            <p class="time">{{ item.recordtime }}</p>
           </div>
         </li>
       </ul>
@@ -47,9 +47,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.investList{
+  height: 100%;
+  // overflow-y: auto;
+}
 ul {
+  padding: 0.5rem 0;
   li {
-    background: #fff;
+    color: #fff;
+    background: linear-gradient(-45deg, #FAD7A1 0%, #E96D71 100%);
+    // background: #fff;
     box-shadow: 0 0.05rem 0.25rem #afafaf;
     border-radius: 0.15rem;
     margin: 0.5rem 0.75rem 0.75rem 0.75rem;
@@ -61,10 +68,10 @@ ul {
       flex-shrink: 0;
     }
     .type {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       font-weight: bold;
-      color: #ff9180;
-      border: 0.05rem solid #ff9180;
+      color: #fff;
+      border: 0.05rem solid #fff;
       border-radius: 0.25rem;
       padding: 0.5rem;
     }
@@ -74,7 +81,8 @@ ul {
       line-height: 1rem;
     }
     .time {
-      color: #666;
+      font-size: 0.7rem;
+      color: #eee;
       margin-top: 0.5rem;
     }
   }

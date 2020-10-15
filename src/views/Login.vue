@@ -59,7 +59,15 @@ export default {
       }
       // 进行登录请求
       //
-      localStorage.setItem("user", this.username);
+      let data = {
+        username:this.username,
+        password:this.password
+      }
+      //  this.$POST('/customer/Signin',data)
+      //   .then(res=>{
+      //     console.log('res')
+      //   })
+      localStorage.setItem("user", JSON.stringify({userid:10000,username:'admin',nickname:'系统管理员',shareid:'20001'}) );
       Notify({ type: "success", message: "登录成功", duration: 1000 });
       this.$router.push("/home");
     }
@@ -71,7 +79,10 @@ export default {
 .login {
   background: url("../assets/images/bg.jpg") no-repeat;
   background-size: 100% 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
