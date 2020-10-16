@@ -24,14 +24,14 @@
         class="my-swipe"
         :loop="false"
         indicator-color="white"
-        style="height:8rem"
+        style="height:6.5rem"
       >
         <van-swipe-item>
           <div class="p_item shadow">
             <h3>{{proData.projectname}}</h3>
             <p>{{proData.projectsampledec}}</p>
             <div class="money">{{proData.projectmonenynum}}</div>
-            <button class="detail">查看详情</button>
+            <!-- <button class="detail">查看详情</button> -->
           </div>
         </van-swipe-item>
       </van-swipe>
@@ -44,18 +44,18 @@
       <ul class="good_pro">
         <li class="">
           <div class="money">{{proData.projectteamnum}}</div>
-          <div class="desc">{{proData.projectteamnum}}</div>
-          <div class="tip">团队人数</div>
-        </li>
-        <li class="">
-          <div class="money">{{proData.projectteamnum}}</div>
           <div class="desc">{{proData.projectteamnumdec}}</div>
           <div class="tip">团队人数</div>
         </li>
         <li class="">
+          <div class="money">{{proData.projectmonenynum}}</div>
+          <div class="desc">{{proData.projectsumdec}}</div>
+          <div class="tip">投资金额</div>
+        </li>
+        <li class="">
           <div class="money">{{proData.projectperson}}</div>
           <div class="desc">{{proData.projectpersondec}}</div>
-          <div class="tip">团队人数</div>
+          <div class="tip">直推人数</div>
         </li>
       </ul>
     </div>
@@ -146,7 +146,7 @@ export default {
     margin-top: 0.5rem;
   }
   .money {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #dd5044;
     margin: 0.5rem;

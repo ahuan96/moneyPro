@@ -1,10 +1,12 @@
 import axios from 'axios'
+import { Toast } from 'vant';
 // import { Message } from 'element-ui';
 
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = 'http://localhost:3000/'
-// axios.defaults.baseURL = 'http://118.107.40.50:8080/'
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = 'http://118.107.40.50:8080/'
+// 配置代理时使用
+// axios.defaults.baseURL = '/api'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -58,7 +60,12 @@ export function fetch(url, params = {}) {
         params: params,
       })
       .then((response) => {
-        resolve(response.data)
+        if(response.data.code == 0){
+          resolve(response.data)
+        }else{
+          Toast.fail(response.data.msg);
+        }
+
       })
       .catch((err) => {
         reject(err)
@@ -87,7 +94,11 @@ export function post(url, data = {}) {
     }
      axios.post(url,param)
           .then(response => {
-            resolve(response.data);
+            if(response.data.code == 0){
+              resolve(response.data)
+            }else{
+              Toast.fail(response.data.msg);
+            }
           },err => {
             reject(err)
           })

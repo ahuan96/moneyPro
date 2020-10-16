@@ -2,13 +2,13 @@
   <div class=''>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="height:160px">
     <van-swipe-item>
-      <img src="../assets/images/s1.jpg" alt="" />
+      <img src="../assets/images/n1.jpg" alt="" />
     </van-swipe-item>
      <van-swipe-item>
-      <img src="../assets/images/s2.jpg" alt="" />
+      <img src="../assets/images/n2.jpg" alt="" />
     </van-swipe-item>
      <van-swipe-item>
-      <img src="../assets/images/s3.jpg" alt="" />
+      <img src="../assets/images/n3.jpg" alt="" />
     </van-swipe-item>
   </van-swipe>
   </div>

@@ -63,8 +63,12 @@ export default {
   },
   methods:{
       onSubmit(){
-        Toast.success('修改成功');
-        this.$router.push('/me')
+        this.$POST('/customer/updatePwd',{oldpassword:this.oldpassword,newpassword:this.newpassword})
+        .then(res=>{
+          Toast.success('修改成功');
+          this.$router.push('/me')
+        })
+
       },
       validatorPass(){
       if(this.newpassword == this.repassword){

@@ -1,6 +1,10 @@
 <template>
   <div class="login">
-    <h1 class="tip">登录</h1>
+    <div class="logo-box">
+      <img src="../assets/images/logo.png" alt="">
+      <h1>新基建</h1>
+    </div>
+    <!-- <h1 class="tip">登录</h1> -->
     <van-form @submit="onSubmit" class="form">
       <van-field
         v-model="username"
@@ -21,10 +25,10 @@
       <div class="to-register"><router-link to="/register" tag="span">我要注册</router-link></div>
       <div style="margin: 16px;">
         <van-button
-          style="color: #74C3CA;"
+          style="background: #0590DF;"
           round
           block
-          type="default"
+          type="primary"
           native-type="submit"
         >
           登录
@@ -58,18 +62,23 @@ export default {
         return;
       }
       // 进行登录请求
-      //
       let data = {
         username:this.username,
         password:this.password
       }
-      //  this.$POST('/customer/Signin',data)
-      //   .then(res=>{
-      //     console.log('res')
-      //   })
-      localStorage.setItem("user", JSON.stringify({userid:10000,username:'admin',nickname:'系统管理员',shareid:'20001'}) );
-      Notify({ type: "success", message: "登录成功", duration: 1000 });
-      this.$router.push("/home");
+       this.$POST('/customer/Signin',data)
+        .then(res=>{
+          this.getUserInfo()
+        })
+    },
+    // 获取用户信息
+    getUserInfo(){
+       this.$POST('/customer/getCustomerByName',{username:this.username})
+        .then(res=>{
+          localStorage.setItem("user", JSON.stringify(res.data[0]) );
+          Notify({ type: "success", message: "登录成功", duration: 1000 });
+          this.$router.push("/home");
+        })
     }
   }
 };
@@ -77,7 +86,7 @@ export default {
 
 <style lang="less" scoped>
 .login {
-  background: url("../assets/images/bg.jpg") no-repeat;
+  // background: url("../assets/images/bg.jpg") no-repeat;
   background-size: 100% 100%;
   position: absolute;
   top: 0;
@@ -89,12 +98,23 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  .logo-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #0590DF;
+    img{
+      width: 3rem;
+      margin-bottom: 0.5rem;
+    }
+  }
   .tip {
     margin-top: 2.5rem;
     font-weight: bold;
-    color: #fff;
-    font-size: 1.8rem;
+    color: #000;
+    font-size: 1.2rem;
     padding-left: 1rem;
     padding-bottom: 1rem;
   }
@@ -108,7 +128,7 @@ export default {
   }
   .to-register{
     text-align: right;
-    color: #fff;
+    color:#0590DF;
     height: 1.5rem;
     line-height: 1.5rem;
     font-size: 16px;
@@ -117,7 +137,7 @@ export default {
 }
 </style>
 <style lang="">
-.login .van-cell {
+/* .login .van-cell {
   background-color: #b3dfe2;
 }
 .login .van-cell input {
@@ -132,5 +152,5 @@ export default {
 }
 .login .pass-box.van-cell::after {
   border-bottom: none;
-}
+} */
 </style>

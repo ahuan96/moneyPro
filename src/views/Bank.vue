@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       showAdd: false,
-      cardList:[{id:'1',userName:'cardname',cardid:'3239 92308 14331 32123'}],
+      cardList:[],
       cardName: '', // 银行卡用户名
       cardNum: '' // 银行卡号
     };
@@ -95,7 +95,11 @@ export default {
           }
         this.$POST('/card/addBankCard',item)
         .then(res=>{
-          console.log('res')
+          this.showAdd = false;
+          this.cardName = ''
+          this.cardNum = ''
+          Toast.success('绑卡成功');
+          this.getList()
         })
 
           // this.cardList.push(item)
@@ -112,9 +116,13 @@ export default {
         message: '确定删除吗？',
       })
         .then(() => {
-          this.cardList = []
-          Toast.success('删除成功');
           // on confirm
+           this.$POST('/card/delBankCard',{})
+          .then(res=>{
+             this.cardList = []
+            Toast.success('删除成功');
+          })
+
         })
         .catch(() => {
           // on cancel
@@ -124,9 +132,8 @@ export default {
       // 获取列表数据
         getList(cb) {
           this.$GET("/card/getCardByUserId", {}).then(res => {
-            console.log(res);
             res.data.forEach((item)=>{
-              item.cardid = item.cardid.replace(/\s/g, '').replace(/(\w{4})(?=\w)/g, '$1 ')
+              item.cardid =  String(item.cardid).replace(/\s/g, '').replace(/(\w{4})(?=\w)/g, '$1 ')
             })
             this.cardList = res.data;
             if (cb) {

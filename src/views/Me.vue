@@ -5,7 +5,7 @@
       <div></div>
       <div class="user">
         <img src="../assets/images/head.png" alt="" />
-        <h3>王健林</h3>
+        <h3>{{userInfo.nickname}}</h3>
       </div>
     </div>
 
@@ -29,7 +29,8 @@
     </ul>
 
     <div>
-      <van-cell title="提现" to="withdraw" is-link />
+      <van-cell title="提现" @click="showNot" />
+      <!-- <van-cell title="提现" to="withdraw" is-link /> -->
       <van-cell title="银行卡" to="bank" is-link />
       <van-cell title="投资记录" to="investHistory" is-link />
       <van-cell title="奖金明细" to="accountHistory" is-link />
@@ -44,11 +45,13 @@
 </template>
 
 <script>
+import { Toast } from "vant";
 export default {
   name: "",
   data() {
     return {
-      acountData:{}
+      acountData:{},
+      userInfo:{}
     };
   },
   created() {},
@@ -62,10 +65,14 @@ export default {
       this.$router.push("/login");
     },
     getInfo() {
+      this.userInfo = JSON.parse(localStorage.getItem('user'))
       this.$GET("/account/getAccountByUserId", {}).then(res => {
         console.log(res);
         this.acountData = res.data[0]
       });
+    },
+    showNot(){
+      Toast.fail('稍后开放')
     }
   }
 };
@@ -90,13 +97,17 @@ export default {
     background: #d0b0b8;
   }
   .user {
-    width: 4.5rem;
+    width: 8rem;
     height: 4.5rem;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -2.25rem;
+    margin-left: -4rem;
     margin-top: -2.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   img {
     width: 4.5rem;
