@@ -104,7 +104,7 @@ export default {
     },
     // 获取列表数据
     getList(cb) {
-      this.$GET("/withdraw/getWithDraw", {}).then((res) => {
+      this.$GET("/withdraw/getWithDrawByid", {}).then((res) => {
         console.log(res);
         this.list = res.data;
         if (cb) {
