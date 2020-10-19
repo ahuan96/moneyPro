@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>客户列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../dist/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../dist/layuiadmin/style/admin.css" media="all">
+</head>
+
+<body>
+
+    <div class="layui-card layadmin-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb">
+            <a lay-href="">主页</a>
+            <a><cite>组件</cite></a>
+            <a><cite>数据表格</cite></a>
+            <a><cite>开启分页</cite></a>
+        </div>
+    </div>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户名：</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <button type="button" class="layui-btn searchBtn">搜索</button>
+                        <button type="button" class="layui-btn addBtn">新增客户</button>
+                    </div>
+                    <div class="layui-card-body">
+                        <table class="layui-hide" lay-filter="demo" id="test-table-page"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑弹框 -->
+        <div class="layui-form" id="editUser" lay-filter="component-form-element" style="display: none;">
+            <div class="layui-row " style="margin-top: 10px;">
+                <div class="layui-col-md11">
+                    <label class="layui-form-label">用户名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="edit-username" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top: 10px;">
+                <div class="layui-col-md11">
+                    <label class="layui-form-label">密码：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="edit-password" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑弹框 -->
+        <div class="layui-form" id="addUser" lay-filter="component-form-element" style="display: none;">
+            <div class="layui-row " style="margin-top: 10px;">
+                <div class="layui-col-md11">
+                    <label class="layui-form-label">用户名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="add-username" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top: 10px;">
+                <div class="layui-col-md11">
+                    <label class="layui-form-label">密码：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="add-password" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top: 10px;">
+                <div class="layui-col-md11">
+                    <label class="layui-form-label">邀请码：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="add-shareby" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="barDemo">
+    <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script src="../../dist/layuiadmin/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: '../../dist/layuiadmin/', //静态资源所在路径
+        }).extend({
+            index: 'lib/index', //主入口模块
+
+        }).use(['jquery', 'index', 'table', 'http'], function () {
+            var admin = layui.admin
+                , $ = layui.$
+                , table = layui.table;
+
+            var http = layui.http
+
+            var mytable = table.render({
+                elem: '#test-table-page'
+                , url: layui.setter.baseUrl + 'customer/getCustomerAll'
+                , where: { userid: JSON.parse(localStorage.getItem('user')).userid }
+                , cols: [[
+                    { field: 'userid', width: 80, title: 'ID' }
+                    , { field: 'username', width: 120, title: '用户名' }
+                    , { field: 'nickname', width: 120, title: '昵称' }
+                    , { field: 'shareby', width: 80, title: '分享者' }
+                    , { field: 'registertime', title: '注册时间', minWidth: 150 }
+                    , { field: 'wealth', width: 200, title: '操作', templet: '#barDemo' }
+                ]]
+                // ,page: true
+                , parseData: function (res) {
+                    console.log(res)
+                    return {
+                        "code": res.code,
+                        "data": res.data
+                    }
+                }
+            });
+
+
+            //监听工具条
+            table.on('tool(demo)', function (obj) {
+                var data = obj.data;
+                console.log(data)
+                
+
+                // 删除客户
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        var obj = {
+                            userid: data.userid
+                        }
+                        http.post('customer/delCustomer', obj, function () {
+                            layer.close(index);
+                            layer.msg('删除成功');
+                            mytable.reload()
+
+                        })
+                        layer.close(index);
+                    });
+                }
+
+                // 编辑客户
+                if (obj.event === 'edit') {
+                    $('[name="edit-username"]').val(data.username)
+                    $('[name="edit-password"]').val(data.password)
+
+
+                    layer.open({
+                        title: '用户编辑',
+                        type: 1,
+                        shade: false,
+                        btn: ['确定', '取消'],
+                        area: ['500px', '400px'],
+                        content: $('#editUser'),
+                        yes: function (index) {
+                            var obj = {
+                                username: $("[name='edit-username']").val(),
+                                password: $("[name='edit-password']").val(),
+                                userid: data.userid
+                            }
+                            if (!obj.username) {
+                                layer.msg('用户名不能为空');
+                                return
+                            }
+                            if (!obj.password) {
+                                layer.msg('密码不能为空');
+                                return
+                            }
+                            console.log(obj);
+                            http.post('customer/updateCustomer', obj, function () {
+                                layer.close(index);
+                                layer.msg('修改成功');
+                                mytable.reload()
+
+                            })
+                        }
+                        , btn2: function (index) {
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+
+
+            // 搜索客户
+            $('.searchBtn').on('click',function(){
+                alert(1)
+            })
+            // 新增客户
+            $('.addBtn').on('click',function(){
+                $('[name="add-username"]').val('')
+                    $('[name="add-password"]').val('')
+                    $('[name="add-shareby"]').val('')
+
+
+                    layer.open({
+                        title: '用户编辑',
+                        type: 1,
+                        shade: false,
+                        btn: ['确定', '取消'],
+                        area: ['500px', '400px'],
+                        content: $('#addUser'),
+                        yes: function (index) {
+                            var obj = {
+                                username: $("[name='add-username']").val(),
+                                password: $("[name='add-password']").val(),
+                                shareby: $("[name='add-shareby']").val(),
+                            }
+                            if (!obj.username) {
+                                layer.msg('用户名不能为空');
+                                return
+                            }
+                            if (!obj.password) {
+                                layer.msg('密码不能为空');
+                                return
+                            }
+                            if (!obj.shareby) {
+                                layer.msg('邀请码不能为空');
+                                return
+                            }
+                            console.log(obj);
+                            http.post('customer/Register', obj, function () {
+                                layer.close(index);
+                                layer.msg('新增成功');
+                                mytable.reload()
+
+                            })
+                        }
+                        , btn2: function (index) {
+                            layer.close(index);
+                        }
+                    });
+            })
+        });
+    </script>
+</body>
+
+</html>

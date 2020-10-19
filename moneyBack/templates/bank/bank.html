@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>客户列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../dist/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../dist/layuiadmin/style/admin.css" media="all">
+</head>
+
+<body>
+
+    <div class="layui-card layadmin-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb">
+            <a lay-href="">主页</a>
+            <a><cite>组件</cite></a>
+            <a><cite>数据表格</cite></a>
+            <a><cite>开启分页</cite></a>
+        </div>
+    </div>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户ID：</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="userid" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <button type="button" class="layui-btn searchBtn">搜索</button>
+                        <!-- <button type="button" class="layui-btn addBtn">新增客户</button> -->
+                    </div>
+                    <div class="layui-card-body">
+                        <table class="layui-hide" lay-filter="demo" id="test-table-page"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="barDemo">
+    <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script src="../../dist/layuiadmin/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: '../../dist/layuiadmin/', //静态资源所在路径
+        }).extend({
+            index: 'lib/index', //主入口模块
+
+        }).use(['jquery', 'index', 'table', 'http'], function () {
+            var admin = layui.admin
+                , $ = layui.$
+                , table = layui.table;
+
+            var http = layui.http
+
+            var mytable
+
+            // 搜索客户
+            $('.searchBtn').on('click', function () {
+                let userid = $('[name="userid"]').val()
+                if(!userid){
+                    layer.msg('请输入搜索条件') 
+                    return
+                }
+                mytable = table.render({
+                    elem: '#test-table-page'
+                    , url: layui.setter.baseUrl + 'card/getCardByUserId'
+                    , where: { userid}
+                    , cols: [[
+                        { field: 'cardid', title: '卡号' }
+                        , { field: 'cardname', title: '绑定者' }
+                    ]]
+                    // ,page: true
+                    , parseData: function (res) {
+                        console.log(res)
+                        return {
+                            "code": res.code,
+                            "data": res.data
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+</body>
+
+</html>
