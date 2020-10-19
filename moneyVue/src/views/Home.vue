@@ -173,8 +173,11 @@ export default {
     // flex-shrink: 0;
     border-radius: 0.25rem;
     border: 0.05rem solid #ebeef5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .money {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
       color: #dd5044;
       // color:#DD5044;

@@ -29,8 +29,8 @@
     </ul>
 
     <div>
-      <van-cell title="提现" @click="showNot" />
-      <!-- <van-cell title="提现" to="withdraw" is-link /> -->
+      <!-- <van-cell title="提现" @click="showNot" /> -->
+      <van-cell title="提现" to="withdraw" is-link />
       <van-cell title="银行卡" to="bank" is-link />
       <van-cell title="投资记录" to="investHistory" is-link />
       <van-cell title="奖金明细" to="accountHistory" is-link />

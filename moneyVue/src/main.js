@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 
 import {fetch,post} from './utils/http.js'
+import {formatTime} from './utils/common.js'
 
 Vue.config.productionTip = false
 
@@ -10,6 +11,7 @@ Vue.config.productionTip = false
 // 方法库设置
 Vue.prototype.$POST = post
 Vue.prototype.$GET = fetch
+Vue.prototype.$formatTime = formatTime
 
 // reset.css 全局重置样式
 import '../src/assets/style/reset.css'
