@@ -48,7 +48,7 @@
                 </div>
               </div>
               <button type="button" class="layui-btn searchBtn">搜索</button>
-              <!-- <button type="button" class="layui-btn addBtn">新增投资</button> -->
+              <button type="button" class="layui-btn addBtn">新增投资</button>
             </div>
             <div class="layui-card-body">
               <table
@@ -60,6 +60,33 @@
           </div>
         </div>
       </div>
+      <!-- 编辑弹框 -->
+      <div class="layui-form" id="addUser" lay-filter="component-form-element" style="display: none;">
+        <div class="layui-row " style="margin-top: 10px;">
+            <div class="layui-col-md11">
+                <label class="layui-form-label">用户ID：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="add-userid" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px;">
+            <div class="layui-col-md11">
+                <label class="layui-form-label">金额：</label>
+                <div class="layui-input-block">
+                    <input type="number" name="add-money" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px;">
+          <div class="layui-col-md11">
+              <label class="layui-form-label">投资描述：</label>
+              <div class="layui-input-block">
+                <textarea name="add-recorddec" placeholder="请输入内容" class="layui-textarea"></textarea>
+              </div>
+          </div>
+      </div>
+    </div>
     </div>
 
     <script src="../../dist/layuiadmin/layui/layui.js"></script>
@@ -71,10 +98,11 @@
         .extend({
           index: 'lib/index', //主入口模块
         })
-        .use(['index', 'jquery', 'table'], function () {
+        .use(['index', 'jquery', 'table','http'], function () {
           var table = layui.table,
             $ = layui.$,
-            admin = layui.admin
+            admin = layui.admin,
+            http = layui.http;
 
           // 初始化表格
           initTable()
@@ -105,6 +133,53 @@
           $(document).on('click', '.searchBtn', function () {
             initTable()
           })
+
+          
+          // 新增投资
+          $('.addBtn').on('click',function(){
+                    $('[name="add-userid"]').val('')
+                    $('[name="add-money"]').val('')
+                    $('[name="add-recorddec"]').val('')
+
+
+                    layer.open({
+                        title: '新增投资',
+                        type: 1,
+                        shade: false,
+                        btn: ['确定', '取消'],
+                        area: ['500px', '400px'],
+                        content: $('#addUser'),
+                        yes: function (index) {
+                            var obj = {
+                              userid: $("[name='add-userid']").val(),
+                              money: $("[name='add-money']").val(),
+                              recorddec: $("[name='add-recorddec']").val(),
+                            }
+                            if (!obj.userid) {
+                                layer.msg('用户ID不能为空');
+                                return
+                            }
+                            if (!obj.money) {
+                                layer.msg('金额不能为空');
+                                return
+                            }
+                            if (!obj.recorddec) {
+                                layer.msg('投资不能为空');
+                                return
+                            }
+                            console.log(obj);
+                            http.post('account/addInvestor', obj, function () {
+                                layer.close(index);
+                                layer.msg('添加投资记录成功');
+                                initTable()
+
+                            })
+                        }
+                        , btn2: function (index) {
+                            layer.close(index);
+                        }
+                    });
+            })
         })
     </script>
   </body>
