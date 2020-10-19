@@ -124,7 +124,7 @@
       },{
         "name": "login"
         ,"title": "登入"
-        ,"jump": "user/login"
+        ,"jump": "login"
       },{
         "name": "forget"
         ,"title": "忘记密码"

@@ -47,7 +47,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <!-- <dd><a lay-href="set/user/password.html">修改密码</a></dd> -->
                         <hr>
                         <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                     </dl>
@@ -94,6 +94,9 @@
                         </dl>
                         <dl class="layui-nav-child">
                             <dd><a lay-href="money/touzi.html">投资管理</a></dd>
+                        </dl>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="money/jiangjin.html">奖金管理</a></dd>
                         </dl>
                     </li>
                     <li data-name="template" class="layui-nav-item">
@@ -162,7 +165,12 @@
         base: '../dist/layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use('index');
+    }).use('index',function(){
+      let user =   localStorage.getItem('user')
+      if(!(user && JSON.parse(user).userid)){
+        location.href = './login.html'
+      }
+    });
 
 
 

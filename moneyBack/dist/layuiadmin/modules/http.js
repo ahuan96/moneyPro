@@ -1,6 +1,5 @@
 layui.define('jquery',function(exports){ //提示：模块也可以依赖其它模块，如：layui.define('layer', callback);
   var $ = layui.$
-  var serverPath = 'http://118.107.40.50:8080/'; //掉接口服务器地址
   var obj = {
     get: function(url,data,fn){
       request('get',url,data,fn)
@@ -20,21 +19,14 @@ layui.define('jquery',function(exports){ //提示：模块也可以依赖其它�
       data.userid =  user.userid;
     }
     $.ajax({
-        url: serverPath + url,
+        url: layui.setter.baseUrl + url,
         type: type,
         dateType: 'jsonp',
         data: data,
-        // beforeSend :function(xmlHttp){
-        //     xmlHttp.setRequestHeader("If-Modified-Since","0");
-        //     xmlHttp.setRequestHeader("Cache-Control","no-cache");
-        //  },
         success: function (res) {
             if (res.code == 0) {
                 fn(res);
             } 
-            // else if (res.code == 99999) {
-            //     exit();
-            // } 
             else {
                 layer.msg(res.msg)
             }

@@ -81,10 +81,10 @@
 
           // 重置表格
           function initTable() {
-            let url = '/record/getAllRecordByType?type=投资'
+            let url = '/record/getAllRecordByTypeJJ'
             let searchVal = $('[name="search_id"]').val()
             if (searchVal) {
-              url = 'record/getTZRecord?userid=' + searchVal
+              url = 'record/getJJRecord?userid=' + searchVal
             }
             table.render({
               elem: '#test-table-cellEdit',
