@@ -12,7 +12,6 @@
 
   docEl.style.fontSize = 20 * (clientWidth / 375) + 'px';
 
-  console.log(docEl.style.fontSize)
 
       };
 

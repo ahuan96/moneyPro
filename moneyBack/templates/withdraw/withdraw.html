@@ -150,11 +150,13 @@
       </div>
     </div>
     <script type="text/html" id="barDemo">
+      {{# if(d.withdraw_status==0){ }}
       <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
       <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
       <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="nopass"
         >驳回</a
       >
+      {{# } }}
     </script>
     <script src="../../dist/layuiadmin/layui/layui.js"></script>
     <script>
@@ -194,11 +196,13 @@
               method: method,
               cols: [
                 [
-                  { field: 'userid', width: 80, title: 'ID' },
+                  { field: 'userid', width: 80, title: '用户ID' },
                   { field: 'username', width: 120, title: '用户名' },
+                  { field: 'bankcard', width: 220, title: '银行卡号' },
                   { field: 'withdraw_type', width: 120, title: '类型' },
                   { field: 'status_name', width: 120, title: '状态' },
                   { field: 'withdraw_money', title: '申请金额' },
+                  { field: 'withdraw_time', title: '申请时间' },
                   {
                     field: 'wealth',
                     width: 200,
@@ -212,7 +216,6 @@
                 res.data.forEach(function (item) {
                   item.status_name = getStatus(item.withdraw_status)
                 })
-                console.log(res)
                 return {
                   code: res.code,
                   data: res.data,
@@ -244,7 +247,6 @@
           //监听工具条
           table.on('tool(demo)', function (obj) {
             var data = obj.data
-            console.log(data)
 
             // 驳回请求
             if (obj.event === 'nopass') {
@@ -253,6 +255,8 @@
                   id: data.id,
                   userid: data.userid,
                   status: 2,
+                  withdraw_type: data.withdraw_type,
+                  withdraw_money: data.withdraw_money
                 }
                 updateApply(obj)
               })
@@ -265,6 +269,8 @@
                   id: data.id,
                   userid: data.userid,
                   status: 1,
+                  withdraw_type: data.withdraw_type,
+                  withdraw_money: data.withdraw_money
                 }
                 updateApply(obj)
               })
@@ -272,10 +278,10 @@
           })
 
           // 取消申请
-          function updateApply({ id, userid, status }) {
+          function updateApply({ id, userid, status,withdraw_type,withdraw_money }) {
             http.post(
               '/withdraw/updWithDraw',
-              { id, userid, withdraw_status: status },
+              { id, userid, withdraw_status: status,withdraw_type,withdraw_money },
               function () {
                 layer.msg('操作成功')
                 mytable.reload()
@@ -318,7 +324,6 @@
                   layer.msg('邀请码不能为空')
                   return
                 }
-                console.log(obj)
                 http.post('customer/Register', obj, function () {
                   layer.close(index)
                   layer.msg('新增成功')

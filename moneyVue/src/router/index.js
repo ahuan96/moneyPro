@@ -112,8 +112,6 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  console.log(1321)
-  console.log(to, from)
   if (to.path == '/login' || to.path == '/register') {
     next()
     return

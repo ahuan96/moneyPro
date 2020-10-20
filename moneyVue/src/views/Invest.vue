@@ -35,7 +35,6 @@ export default {
     // 获取列表数据
     getList(cb) {
       this.$GET("/record/getAllRecord", {}).then(res => {
-        console.log(res);
         this.list = res.data;
         if (cb) {
           cb();

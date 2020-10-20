@@ -81,7 +81,6 @@ export function fetch(url, params = {}) {
  */
 
 export function post(url, data = {}) {
-  console.log(data)
   let user = localStorage.getItem('user')
   if(user){
     user = JSON.parse(user)

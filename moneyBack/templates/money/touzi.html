@@ -105,7 +105,7 @@
             http = layui.http;
 
           // 初始化表格
-          initTable()
+          // initTable()
 
           // 重置表格
           function initTable() {
@@ -113,6 +113,9 @@
             let searchVal = $('[name="search_id"]').val()
             if (searchVal) {
               url = 'record/getTZRecord?userid=' + searchVal
+            }else{
+              layer.msg('请输入用户ID')
+              return
             }
             table.render({
               elem: '#test-table-cellEdit',
@@ -168,7 +171,6 @@
                                 layer.msg('投资不能为空');
                                 return
                             }
-                            console.log(obj);
                             http.post('account/addInvestor', obj, function () {
                                 layer.close(index);
                                 layer.msg('添加投资记录成功');

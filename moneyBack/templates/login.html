@@ -100,7 +100,6 @@
         ,data: obj.field
         ,method:'post'
         ,done: function(res){
-          console.log(res)
           // 获取用户信息
           getUserInfo(obj.field.username)
         }
@@ -116,7 +115,6 @@
         ,data: {username}
         ,method:'post'
         ,done: function(res){
-          console.log(res)
           //请求成功后，存储信息
           localStorage.setItem("user", JSON.stringify(res.data[0]) );
           

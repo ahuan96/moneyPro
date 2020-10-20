@@ -79,7 +79,7 @@
             http = layui.http;
 
           // 初始化表格
-          initTable()
+          // initTable()
 
           // 重置表格
           function initTable() {
@@ -87,7 +87,9 @@
             let searchVal = $('[name="search_id"]').val()
             if (searchVal) {
               url = 'record/getAllRecord?userid=' + searchVal
-            }
+            }else{
+              layer.msg('请输入用户ID')
+              return
             table.render({
               elem: '#test-table-cellEdit',
               url: layui.setter.baseUrl + url,

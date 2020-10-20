@@ -9,15 +9,15 @@
       style="border-bottom: 1px solid #eee"
     />
 
-    <ul class="card-list" v-if="cardList&&cardList.length>0">
+    <ul class="card-list" v-if="cardList&&cardList.length>0&&cardList[0].bankcard">
       <li v-for="item in cardList" :key="item.id">
         <div>
           <i>姓名</i>
-          <span>{{item.cardname}}</span>
+          <span>{{item.realname}}</span>
         </div>
         <div>
           <i>卡号</i>
-          <span>{{item.cardid}}</span>
+          <span>{{item.bankcard}}</span>
         </div>
         <van-icon class="del-btn" name="delete" @click="delCard" />
       </li>
@@ -133,7 +133,7 @@ export default {
         getList(cb) {
           this.$GET("/card/getCardByUserId", {}).then(res => {
             res.data.forEach((item)=>{
-              item.cardid =  String(item.cardid).replace(/\s/g, '').replace(/(\w{4})(?=\w)/g, '$1 ')
+              item.bankcard =  String(item.bankcard).replace(/\s/g, '').replace(/(\w{4})(?=\w)/g, '$1 ')
             })
             this.cardList = res.data;
             if (cb) {

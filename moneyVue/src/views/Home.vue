@@ -81,8 +81,7 @@ export default {
   methods: {
    // 获取项目数据
     getData(cb) {
-      this.$GET("/index/getProject", {}).then(res => {
-        console.log(res);
+      this.$POST("/index/getProjectByUserId", {}).then(res => {
         if(res.data && res.data.length>0){
            this.proData = res.data[0];
         }else{

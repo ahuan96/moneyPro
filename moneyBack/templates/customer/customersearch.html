@@ -247,7 +247,6 @@
             let searchVal = $('[name="username"]').val()
             let where = {}
             let method = 'get'
-            console.log('aa',searchVal)
             if (searchVal) {
               url = 'customer/getCustomerByName';
               where = {username:searchVal}
@@ -268,7 +267,7 @@
                   { field: 'phonenum', width: 120, title: '联系方式' },
                   { field: 'usercard', width: 200, title: '身份证号' },
                   { field: 'bankcard', width: 200, title: '银行卡号' },
-                  { field: 'registertime', title: '注册时间', minWidth: 150 },
+                  { field: 'registertime', title: '注册时间', minWidth: 200 },
                   {
                     field: 'wealth',
                     width: 160,
@@ -280,7 +279,6 @@
               ],
               // ,page: true
               parseData: function (res) {
-                console.log(res)
                 return {
                   code: res.code,
                   data: res.data,
@@ -292,7 +290,6 @@
           //监听工具条
           table.on('tool(demo)', function (obj) {
             var data = obj.data
-            console.log(data)
 
             // 删除客户
             if (obj.event === 'del') {
@@ -311,31 +308,40 @@
 
             // 编辑客户
             if (obj.event === 'edit') {
-              $('[name="edit-username"]').val(data.username)
-              $('[name="edit-password"]').val(data.password)
+              $('[name="add-username"]').val(data.username)
+              $('[name="add-password"]').val(data.password)
+              $('[name="add-shareby"]').val(data.shareby)
+              $('[name="add-realname"]').val(data.realname)
+              $('[name="add-usercard"]').val(data.usercard)
+              $('[name="add-phonenum"]').val(data.phonenum)
+              $('[name="add-bankcard"]').val(data.bankcard)
 
               layer.open({
                 title: '用户编辑',
                 type: 1,
                 shade: false,
                 btn: ['确定', '取消'],
-                area: ['500px', '400px'],
-                content: $('#editUser'),
+                area: ['500px', '500px'],
+                content: $('#addUser'),
                 yes: function (index) {
                   var obj = {
-                    username: $("[name='edit-username']").val(),
-                    password: $("[name='edit-password']").val(),
+                    username: $("[name='add-username']").val(),
+                    password: $("[name='add-password']").val(),
+                    shareby: $("[name='add-shareby']").val(),
+                    realname: $("[name='add-realname']").val(),
+                    usercard: $("[name='add-usercard']").val(),
+                    phonenum: $("[name='add-phonenum']").val(),
+                    bankcard: $("[name='add-bankcard']").val(),
                     userid: data.userid,
                   }
                   if (!obj.username) {
                     layer.msg('用户名不能为空')
                     return
                   }
-                  if (!obj.password) {
-                    layer.msg('密码不能为空')
-                    return
-                  }
-                  console.log(obj)
+                  // if (!obj.password) {
+                  //   layer.msg('密码不能为空')
+                  //   return
+                  // }
                   http.post('customer/updateCustomer', obj, function () {
                     layer.close(index)
                     layer.msg('修改成功')
@@ -396,7 +402,6 @@
                   layer.msg('身份证格式不正确')
                   return
                 }
-                return
                 // if (!obj.shareby) {
                 //   layer.msg('邀请码不能为空')
                 //   return
@@ -409,7 +414,6 @@
                 //   layer.msg('邀请码不能为空')
                 //   return
                 // }
-                console.log(obj)
                 http.post('customer/Register', obj, function () {
                   layer.close(index)
                   layer.msg('新增成功')

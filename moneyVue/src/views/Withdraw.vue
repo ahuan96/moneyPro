@@ -19,13 +19,13 @@
           <p>{{getStatus(item.withdraw_status) }}</p>
           <p>{{$formatTime( "YYYY-mm-dd HH:MM:SS",item.withdraw_time) }}</p>
         </div>
-        <button v-if="item.withdraw_status == 0" @click="cancelApply(item.id)">取消</button>
+        <button v-if="item.withdraw_status == 0" @click="cancelApply(item)">取消</button>
       </li>
     </ul>
 
     <div class="btn-box">
       <van-button style="width: 90%;margin-top:0.5rem;" plain type="info" @click="showAdd = true"
-        >点击添加</van-button
+        >提现</van-button
       >
     </div>
 
@@ -60,7 +60,7 @@
           <van-radio-group v-model="withdraw_type" direction="horizontal">
             <van-radio name="佣金">佣金</van-radio>
             <van-radio name="奖金">奖金</van-radio>
-            <van-radio name="投资">投资</van-radio>
+            <!-- <van-radio name="投资">投资</van-radio> -->
           </van-radio-group>
         </template>
       </van-field>
@@ -105,7 +105,6 @@ export default {
     // 获取列表数据
     getList(cb) {
       this.$GET("/withdraw/getWithDrawByid", {}).then((res) => {
-        console.log(res);
         this.list = res.data;
         if (cb) {
           cb();
@@ -149,14 +148,14 @@ export default {
       }
     },
     // 取消申请
-    cancelApply(id){
+    cancelApply(item){
         Dialog.confirm({
         title: '提示',
         message: '确定取消吗？',
       })
         .then(() => {
           // on confirm
-          this.$POST('/withdraw/updWithDraw',{id,withdraw_status:3})
+          this.$POST('/withdraw/updWithDraw',{id:item.id,withdraw_status:3,withdraw_type:item.withdraw_type,withdraw_money:item.withdraw_money})
           .then(res=>{
             Toast.success('申请提现成功');
             this.getList()

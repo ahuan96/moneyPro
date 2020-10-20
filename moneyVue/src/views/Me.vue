@@ -5,7 +5,7 @@
       <div></div>
       <div class="user">
         <img src="../assets/images/head.png" alt="" />
-        <h3>{{userInfo.nickname}}</h3>
+        <h3>{{userInfo.username}}</h3>
       </div>
     </div>
 
@@ -19,7 +19,7 @@
         <span>今日收益</span>
       </li>
       <li>
-        <p>{{acountData.surplus_bonus}}</p>
+        <p>{{acountData.total_last}}</p>
         <span>剩余奖金</span>
       </li>
       <li>
@@ -66,8 +66,7 @@ export default {
     },
     getInfo() {
       this.userInfo = JSON.parse(localStorage.getItem('user'))
-      this.$GET("/account/getAccountByUserId", {}).then(res => {
-        console.log(res);
+      this.$POST("/account/getAccountByUserId", {}).then(res => {
         this.acountData = res.data[0]
       });
     },
