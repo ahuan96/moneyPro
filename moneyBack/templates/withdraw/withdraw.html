@@ -172,7 +172,7 @@
 
           var http = layui.http
           var mytable
-          initTable()
+          // initTable()
 
           function initTable() {
             let url = '/withdraw/getWithDraw'
@@ -183,6 +183,9 @@
               url = 'withdraw/getWithDrawByid'
               where = { userid: searchVal }
               method = 'post'
+            }else{
+              layer.msg('请输入用户ID')
+              return
             }
             mytable = table.render({
               elem: '#test-table-page',

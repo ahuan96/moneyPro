@@ -85,21 +85,25 @@
           function initTable() {
             let searchVal = $('[name="search_id"]').val()
             if (searchVal) {
-              url = 'account/getAccountByUserId?userid=' + searchVal
+              url = 'account/getAccountByUserId'
             }else{
                 layer.msg('请输入用户ID')
             }
             table.render({
               elem: '#test-table-cellEdit',
               url: layui.setter.baseUrl + url,
-              // , data:[]
+              method:'post',
+              where:{userid:searchVal},
               cols: [
                 [
                   { field: 'userid', title: '用户ID' },
+                  { field: 'userame', title: '用户名' },
                   { field: 'accumulated_earnings', title: '累计收益' },
+                  { field: 'accumulated_earnings_last', title: '剩余收益' },
                   { field: 'today_income', title: '今日收益' },
                   { field: 'surplus_bonus', title: '剩余奖金' },
-                  { field: 'accumulated_investor', title: '累计投资' }
+                  { field: 'accumulated_investor', title: '累计投资' },
+                  { field: 'acount_capital_total', title: '总余额' }
                 ],
               ],
             })

@@ -19,6 +19,12 @@
       href="../../dist/layuiadmin/style/admin.css"
       media="all"
     />
+    <style>
+      .layui-form i{
+        color: red;
+        padding-right:5px ;
+      }
+    </style>
   </head>
 
   <body>
@@ -51,7 +57,7 @@
               <button type="button" class="layui-btn addBtn">新增客户</button>
             </div>
             <div class="layui-card-body">
-              <table
+              <tablei
                 class="layui-hide"
                 lay-filter="demo"
                 id="test-table-page"
@@ -107,7 +113,7 @@
       >
         <div class="layui-row" style="margin-top: 10px">
           <div class="layui-col-md11">
-            <label class="layui-form-label">用户名：</label>
+            <label class="layui-form-label"><i>*</i>用户名：</label>
             <div class="layui-input-block">
               <input
                 type="text"
@@ -121,7 +127,7 @@
         </div>
         <div class="layui-row" style="margin-top: 10px">
           <div class="layui-col-md11">
-            <label class="layui-form-label">密码：</label>
+            <label class="layui-form-label"><i>*</i>密码：</label>
             <div class="layui-input-block">
               <input
                 type="text"
@@ -135,11 +141,67 @@
         </div>
         <div class="layui-row" style="margin-top: 10px">
           <div class="layui-col-md11">
-            <label class="layui-form-label">邀请码：</label>
+            <label class="layui-form-label"><i>*</i>邀请码：</label>
             <div class="layui-input-block">
               <input
                 type="text"
                 name="add-shareby"
+                placeholder=""
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px">
+          <div class="layui-col-md11">
+            <label class="layui-form-label"> 姓名：</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="add-realname"
+                placeholder=""
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px">
+          <div class="layui-col-md11">
+            <label class="layui-form-label">身份证号：</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="add-usercard"
+                placeholder=""
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px">
+          <div class="layui-col-md11">
+            <label class="layui-form-label">联系方式：</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="add-phonenum"
+                placeholder=""
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="layui-row" style="margin-top: 10px">
+          <div class="layui-col-md11">
+            <label class="layui-form-label">银行卡：</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="add-bankcard"
                 placeholder=""
                 autocomplete="off"
                 class="layui-input"
@@ -173,6 +235,12 @@
           var http = layui.http
           var mytable
 
+          // 验证身份证
+          function IsCard(str) {
+            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+             return reg.test(str);
+         }
+
           initTable()
           function initTable() {
             let url = 'customer/getCustomerAll'
@@ -195,14 +263,18 @@
                   { field: 'userid', width: 80, title: 'ID' },
                   { field: 'username', width: 120, title: '用户名' },
                   { field: 'nickname', width: 120, title: '昵称' },
-                  { field: 'shareid', width: 80, title: '分享者ID' },
-                  { field: 'shareby', width: 80, title: '分享者' },
+                  { field: 'realname', width: 120, title: '姓名' },
+                  { field: 'shareby', width: 120, title: '分享者' },
+                  { field: 'phonenum', width: 120, title: '联系方式' },
+                  { field: 'usercard', width: 200, title: '身份证号' },
+                  { field: 'bankcard', width: 200, title: '银行卡号' },
                   { field: 'registertime', title: '注册时间', minWidth: 150 },
                   {
                     field: 'wealth',
-                    width: 200,
+                    width: 160,
                     title: '操作',
                     templet: '#barDemo',
+                    fixed:'right'
                   },
                 ],
               ],
@@ -286,19 +358,27 @@
             $('[name="add-username"]').val('')
             $('[name="add-password"]').val('')
             $('[name="add-shareby"]').val('')
+            $('[name="add-realname"]').val('')
+            $('[name="add-usercard"]').val('')
+            $('[name="add-phonenum"]').val('')
+            $('[name="add-bankcard"]').val('')
 
             layer.open({
               title: '用户编辑',
               type: 1,
               shade: false,
               btn: ['确定', '取消'],
-              area: ['500px', '400px'],
+              area: ['500px', '500px'],
               content: $('#addUser'),
               yes: function (index) {
                 var obj = {
                   username: $("[name='add-username']").val(),
                   password: $("[name='add-password']").val(),
                   shareby: $("[name='add-shareby']").val(),
+                  realname: $("[name='add-realname']").val(),
+                  usercard: $("[name='add-usercard']").val(),
+                  phonenum: $("[name='add-phonenum']").val(),
+                  bankcard: $("[name='add-bankcard']").val(),
                 }
                 if (!obj.username) {
                   layer.msg('用户名不能为空')
@@ -312,6 +392,23 @@
                   layer.msg('邀请码不能为空')
                   return
                 }
+                if (obj.usercard && !IsCard(obj.usercard)) {
+                  layer.msg('身份证格式不正确')
+                  return
+                }
+                return
+                // if (!obj.shareby) {
+                //   layer.msg('邀请码不能为空')
+                //   return
+                // }
+                // if (!obj.shareby) {
+                //   layer.msg('邀请码不能为空')
+                //   return
+                // }
+                // if (!obj.shareby) {
+                //   layer.msg('邀请码不能为空')
+                //   return
+                // }
                 console.log(obj)
                 http.post('customer/Register', obj, function () {
                   layer.close(index)
