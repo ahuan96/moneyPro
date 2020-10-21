@@ -4,7 +4,7 @@
       <div class="h_bg1"></div>
       <div></div>
       <div class="user">
-        <img src="../assets/images/head.png" alt="" />
+        <img src="../assets/images/head.jpg" alt="" />
         <h3>{{userInfo.username}}</h3>
       </div>
     </div>

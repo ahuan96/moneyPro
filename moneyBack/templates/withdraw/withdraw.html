@@ -56,6 +56,7 @@
                 lay-filter="demo"
                 id="test-table-page"
               ></table>
+              <div id="test1"></div>
             </div>
           </div>
         </div>
@@ -167,14 +168,18 @@
         .extend({
           index: 'lib/index', //主入口模块
         })
-        .use(['jquery', 'index', 'table', 'http'], function () {
+        .use(['jquery', 'index', 'table', 'http','laypage'], function () {
           var admin = layui.admin,
             $ = layui.$,
+            laypage = layui.laypage,
             table = layui.table
 
           var http = layui.http
           var mytable
-          // initTable()
+          
+          // 当卡页码
+          var curPage = 1;
+          initTable()
 
           function initTable() {
             let url = '/withdraw/getWithDraw'
@@ -185,10 +190,11 @@
               url = 'withdraw/getWithDrawByid'
               where = { userid: searchVal }
               method = 'post'
-            }else{
-              layer.msg('请输入用户ID')
-              return
             }
+            // else{
+            //   layer.msg('请输入用户ID')
+            //   return
+            // }
             mytable = table.render({
               elem: '#test-table-page',
               url: layui.setter.baseUrl + url,
@@ -201,27 +207,55 @@
                   { field: 'bankcard', width: 220, title: '银行卡号' },
                   { field: 'withdraw_type', width: 120, title: '类型' },
                   { field: 'status_name', width: 120, title: '状态' },
-                  { field: 'withdraw_money', title: '申请金额' },
-                  { field: 'withdraw_time', title: '申请时间' },
+                  { field: 'withdraw_money',width: 120, title: '申请金额' },
+                  { field: 'withdraw_time',minWidth: 200, title: '申请时间' },
                   {
                     field: 'wealth',
-                    width: 200,
+                    width: 140,
                     title: '操作',
                     templet: '#barDemo',
+                    fixed:'right'
                   },
                 ],
               ],
-              // ,page: true
+              // page: true,
               parseData: function (res) {
                 res.data.forEach(function (item) {
                   item.status_name = getStatus(item.withdraw_status)
                 })
+                initPage(res.data.length)
+                var data = []
+                if(res.data && res.data.length > 0){
+                  data = res.data.slice((curPage-1)*10+0,(curPage-1)*10+9);
+                }
                 return {
                   code: res.code,
-                  data: res.data,
+                  data: data,
+                  // "count": res.data.length
                 }
               },
             })
+          }
+
+
+          function initPage(count){
+            laypage.render({
+              elem: 'test1'
+              ,curr:curPage
+              ,limit:10
+              ,count: count //数据总数，从服务端得到
+              ,jump: function(obj, first){
+                //obj包含了当前分页的所有参数，比如：
+                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+                curPage = obj.curr
+                //首次不执行
+                if(!first){
+                  initTable()
+                  //do something
+                }
+              }
+            });
           }
 
           function getStatus(status) {
@@ -291,6 +325,7 @@
 
           // 搜索客户
           $('.searchBtn').on('click', function () {
+            curPage = 1
             initTable()
           })
           // 新增客户

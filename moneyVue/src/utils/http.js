@@ -4,7 +4,7 @@ import { Toast } from 'vant';
 
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = 'http://localhost:3000/'
-axios.defaults.baseURL = 'http://118.107.40.50:8080/'
+axios.defaults.baseURL = 'http://118.107.40.51:8080/'
 // 配置代理时使用
 // axios.defaults.baseURL = '/api'
 
