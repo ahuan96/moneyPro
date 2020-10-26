@@ -115,11 +115,10 @@ export default {
 .login {
   // background: url("../assets/images/bg.jpg") no-repeat;
   background-size: 100% 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   width: 100%;
+  height: 100%;
   padding: 1rem;
+  padding-top: 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
